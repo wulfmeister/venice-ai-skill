@@ -2,8 +2,8 @@
 name: venice-api
 description: Build AI apps with Venice API - privacy-first, uncensored, OpenAI-compatible. Covers chat, images, audio, video, embeddings, web search.
 version: 1.0.0
-author: jirikitariki
-repository: https://github.com/jirikitariki/venice-ai-skill
+author: wulfmeister
+repository: https://github.com/wulfmeister/venice-ai-skill
 keywords:
   - venice-ai
   - api
@@ -96,10 +96,13 @@ See: https://docs.venice.ai/overview/pricing
 | Use Case | Model |
 |----------|-------|
 | Fast chat | `qwen3-4b` |
-| General | `llama-3.3-70b` |
-| Reasoning | `deepseek-ai-DeepSeek-R1` |
-| Code | `qwen3-coder-480b-a35b-instruct` |
+| General | `zai-org-glm-4.7` |
+| Reasoning | `kimi-k2-thinking` |
+| Code | `grok-code-fast-1` |
+| Vision | `gemini-3-pro-preview` |
 | Uncensored | `venice-uncensored` |
+| Budget reasoning | `deepseek-v3.2` |
+| Frontier | `openai-gpt-52` |
 
 Get all models: `GET /models` (check `capabilities` for vision, function calling, web search)
 

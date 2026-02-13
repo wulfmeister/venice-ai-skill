@@ -55,7 +55,7 @@ print(response.choices[0].message.content)
 
 ```python
 response = client.chat.completions.create(
-    model="llama-3.3-70b",
+    model="zai-org-glm-4.7",
     messages=[{"role": "user", "content": "What are the latest AI news headlines?"}],
     extra_body={
         "venice_parameters": {
@@ -73,7 +73,7 @@ print(response.choices[0].message.content)
 
 ```python
 response = client.chat.completions.create(
-    model="deepseek-ai-DeepSeek-R1",
+    model="kimi-k2-thinking",
     messages=[{"role": "user", "content": "Solve: 2 + 2 = ?"}],
     extra_body={
         "venice_parameters": {
@@ -89,7 +89,7 @@ print(response.choices[0].message.content)
 
 ```python
 stream = client.chat.completions.create(
-    model="llama-3.3-70b",
+    model="zai-org-glm-4.7",
     messages=[{"role": "user", "content": "Write a story"}],
     stream=True
 )
@@ -103,7 +103,7 @@ for chunk in stream:
 
 ```python
 response = client.chat.completions.create(
-    model="vision-capable-model",
+    model="gemini-3-pro-preview",
     messages=[
         {
             "role": "user",
@@ -120,7 +120,7 @@ response = client.chat.completions.create(
 
 ```python
 response = client.chat.completions.create(
-    model="llama-3.3-70b",
+    model="grok-41-fast",
     messages=[{"role": "user", "content": "What's the weather in NYC?"}],
     tools=[
         {

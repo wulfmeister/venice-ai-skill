@@ -24,6 +24,15 @@ Copy `SKILL.md` to your OpenCode skills directory:
 cp SKILL.md ~/.opencode/skills/venice-api/SKILL.md
 ```
 
+### Which file to use?
+
+- **`SKILL.md`** (recommended) - Concise quick-reference (~140 lines). Covers all endpoints, parameters, and gotchas without eating too much context. This is the one most people should use.
+- **`skill-verbose.md`** - Full detailed reference (~1,250 lines). Use this if you want to sacrifice more context window to give your AI assistant deeper knowledge of every parameter, pricing detail, code example, and edge case. Install it the same way:
+  ```bash
+  cp skill-verbose.md ~/.opencode/skills/venice-api/SKILL.md
+  ```
+- **`examples.md`** - Standalone copy-paste code examples for all endpoints. Useful as a separate reference.
+
 ## Quick Examples
 
 ### Chat
@@ -52,7 +61,7 @@ response = client.audio.speech.create(
 ### Web Search
 ```python
 response = client.chat.completions.create(
-    model="llama-3.3-70b",
+    model="zai-org-glm-4.7",
     messages=[{"role": "user", "content": "Latest AI news?"}],
     extra_body={
         "venice_parameters": {

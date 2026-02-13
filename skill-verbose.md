@@ -1,6 +1,9 @@
 ---
 name: venice-api
 description: Build AI applications with Venice API - a privacy-first, uncensored AI platform offering text generation, image generation, audio synthesis, video generation, and embeddings with zero data retention and OpenAI SDK compatibility. Use when integrating Venice API, configuring chat completions, generating images, using web search, or working with Venice-specific features like reasoning models and AI characters.
+version: 1.0.0
+author: wulfmeister
+repository: https://github.com/wulfmeister/venice-ai-skill
 license: MIT
 compatibility: opencode
 metadata:
@@ -124,6 +127,9 @@ func main() {
             openai.UserMessage("Hello World!"),
         }),
     })
+    if err != nil {
+        panic(err)
+    }
     fmt.Println(resp.Choices[0].Message.Content)
 }
 ```
@@ -146,7 +152,7 @@ Use `venice_parameters` object to access features not in the standard OpenAI API
 
 ```python
 response = client.chat.completions.create(
-    model="your-model",
+    model="zai-org-glm-4.7",
     messages=[{"role": "user", "content": "Latest AI news?"}],
     extra_body={
         "venice_parameters": {
@@ -168,7 +174,7 @@ When `enable_web_citations` is true, responses include markers like `[REF]0[/REF
 
 ```python
 response = client.chat.completions.create(
-    model="your-reasoning-model",
+    model="kimi-k2-thinking",
     messages=[{"role": "user", "content": "Solve this problem"}],
     extra_body={
         "venice_parameters": {
@@ -574,7 +580,7 @@ GET /api/v1/models/traits
 GET /api/v1/models/compatibility_mapping
 ```
 - `traits`: Returns model traits (e.g., `default`, `fastest`)
-- `compatibility_mapping`: Maps OpenAI models to Venice equivalents (e.g., `gpt-4o` → `llama-3.3-70b`)
+- `compatibility_mapping`: Maps OpenAI models to Venice equivalents (e.g., `gpt-4o` → `zai-org-glm-4.7`)
 
 ---
 
@@ -587,7 +593,7 @@ GET /api/v1/models/compatibility_mapping
 | XS   | 500         | 1,000,000  | `qwen3-4b`, `llama-3.2-3b` |
 | S    | 75          | 750,000    | `mistral-31-24b`, `venice-uncensored` |
 | M    | 50          | 750,000    | `llama-3.3-70b`, `qwen3-next-80b`, `google-gemma-3-27b-it` |
-| L    | 20          | 500,000    | `qwen3-235b-a22b`, `deepseek-ai-DeepSeek-R1`, `gemini-3-pro-preview` |
+| L    | 20          | 500,000    | `kimi-k2-thinking`, `grok-41-fast`, `gemini-3-pro-preview`, `zai-org-glm-4.7` |
 
 ### Other Model Types
 
@@ -723,12 +729,14 @@ print(f"Estimated cost: ${quote.json()['quote']}")
 
 | Use Case | Recommended Model |
 |----------|------------------|
-| Fast chat/classification | `qwen3-4b` (XS tier) |
-| General purpose | `llama-3.3-70b`, `qwen3-next-80b` |
-| Complex reasoning | `deepseek-ai-DeepSeek-R1`, `qwen3-235b-a22b-thinking` |
-| Code generation | `qwen3-coder-480b-a35b-instruct` |
-| Vision/analysis | Models with `supportsVision: true` |
-| No content filtering | `venice-uncensored` |
+| Fast chat/classification | `qwen3-4b` (XS tier, Private) |
+| General purpose | `zai-org-glm-4.7`, `minimax-m21` |
+| Complex reasoning | `kimi-k2-thinking`, `deepseek-v3.2` |
+| Code generation | `grok-code-fast-1`, `qwen3-coder-480b-a35b-instruct` |
+| Vision/analysis | `gemini-3-pro-preview`, `grok-41-fast` |
+| No content filtering | `venice-uncensored` (Private) |
+| Frontier | `openai-gpt-52`, `claude-opus-45` |
+| Budget vision | `google-gemma-3-27b-it` (Private) |
 | Web search | Models with `supportsWebSearch: true` |
 | Function calling | Models with `supportsFunctionCalling: true` |
 
@@ -792,7 +800,7 @@ Venice supports automatic prompt caching on select models:
 ### Manual Cache Control
 ```python
 response = client.chat.completions.create(
-    model="your-model",
+    model="zai-org-glm-4.7",
     messages=[
         {
             "role": "system",
@@ -819,7 +827,7 @@ Use vision-capable models for image analysis:
 
 ```python
 response = client.chat.completions.create(
-    model="vision-capable-model",
+    model="gemini-3-pro-preview",
     messages=[
         {
             "role": "user",
@@ -885,7 +893,7 @@ Define tools for model to call external APIs:
 
 ```python
 response = client.chat.completions.create(
-    model="function-calling-model",
+    model="grok-41-fast",
     messages=[{"role": "user", "content": "What's the weather in NYC?"}],
     tools=[
         {
@@ -920,7 +928,7 @@ Force JSON responses with guaranteed schemas:
 
 ```python
 response = client.chat.completions.create(
-    model="your-model",
+    model="zai-org-glm-4.7",
     messages=[{"role": "user", "content": "List 3 fruits with colors"}],
     response_format={"type": "json_object"}
 )
@@ -934,7 +942,7 @@ Enable streaming for real-time responses:
 
 ```python
 stream = client.chat.completions.create(
-    model="your-model",
+    model="zai-org-glm-4.7",
     messages=[{"role": "user", "content": "Write a story"}],
     stream=True
 )
@@ -1040,7 +1048,7 @@ print(response.choices[0].message.content)
 
 ```python
 response = client.chat.completions.create(
-    model="llama-3.3-70b",
+    model="zai-org-glm-4.7",
     messages=[{"role": "user", "content": "What are the latest AI news headlines?"}],
     extra_body={
         "venice_parameters": {
