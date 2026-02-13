@@ -1,6 +1,8 @@
-# Venice AI Skill for OpenCode
+# Venice AI API Skill
 
-A comprehensive skill for building AI applications with the Venice API - a privacy-first, uncensored AI platform with zero data retention and OpenAI SDK compatibility.
+A skill that teaches AI coding assistants how to use the Venice API - a privacy-first, uncensored AI platform with zero data retention and OpenAI SDK compatibility.
+
+Works with **Claude Code**, **OpenCode**, **Cursor**, **Windsurf**, **Cline**, **Kilo Code**, and any tool that supports skill/rules files.
 
 ## What is Venice AI?
 
@@ -13,24 +15,26 @@ Venice is an AI API platform offering:
 
 ## Installation
 
-### For OpenCode
+Copy `SKILL.md` into your tool's skills/rules directory:
 
-The skill is automatically loaded when you mention "venice" in your prompts.
+| Tool | Location |
+|------|----------|
+| **OpenCode** | `~/.opencode/skills/venice-api/SKILL.md` |
+| **Claude Code** | `.claude/skills/venice-api.md` in your project |
+| **Cursor** | `.cursor/rules/venice-api.mdc` in your project |
+| **Windsurf** | `.windsurfrules` in your project |
+| **Cline** | `.clinerules/venice-api.md` in your project |
+| **Kilo Code** | `.kilocode/rules/venice-api.md` in your project |
 
-### Manual Installation
-
-Copy `SKILL.md` to your OpenCode skills directory:
 ```bash
+# Example for OpenCode
 cp SKILL.md ~/.opencode/skills/venice-api/SKILL.md
 ```
 
 ### Which file to use?
 
 - **`SKILL.md`** (recommended) - Concise quick-reference (~140 lines). Covers all endpoints, parameters, and gotchas without eating too much context. This is the one most people should use.
-- **`skill-verbose.md`** - Full detailed reference (~1,250 lines). Use this if you want to sacrifice more context window to give your AI assistant deeper knowledge of every parameter, pricing detail, code example, and edge case. Install it the same way:
-  ```bash
-  cp skill-verbose.md ~/.opencode/skills/venice-api/SKILL.md
-  ```
+- **`skill-verbose.md`** - Full detailed reference (~1,250 lines). Use this if you want to sacrifice more context window to give your AI assistant deeper knowledge of every parameter, pricing detail, code example, and edge case.
 - **`examples.md`** - Standalone copy-paste code examples for all endpoints. Useful as a separate reference.
 
 ## Quick Examples
@@ -91,6 +95,7 @@ response = client.chat.completions.create(
 - [Pricing](https://docs.venice.ai/overview/pricing)
 - [Models](https://docs.venice.ai/overview/models)
 - [API Keys](https://venice.ai/settings/api)
+- [SkillMD Listing](https://skillmd.ai/skills/venice-ai-api-skill/)
 
 ## License
 
