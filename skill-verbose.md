@@ -241,6 +241,12 @@ curl ... -d '{"model": "model-id:enable_web_search=on&enable_web_citations=true"
 | `return_search_results_as_documents` | boolean | Results as tool call for LangChain | `false` |
 | `include_venice_system_prompt` | boolean | Include Venice's system prompts | `true` |
 
+Also in `extra_body` (but outside `venice_parameters`):
+
+| Parameter | Type | Description | Default |
+|-----------|------|-------------|---------|
+| `prompt_cache_key` | string | Routing hint for cache hits in multi-turn conversations | - |
+
 ---
 
 ## Response Headers
@@ -740,6 +746,8 @@ print(f"Estimated cost: ${quote.json()['quote']}")
 | Web search | Models with `supportsWebSearch: true` |
 | Function calling | Models with `supportsFunctionCalling: true` |
 
+> **Note:** Venice rotates models frequently. Always verify current models with `GET /models` or use `GET /models/traits` for auto-selection (`default`, `fastest`, `default_code`, etc.) to avoid hardcoding stale model IDs.
+
 ### By Trait
 
 ```bash
@@ -1013,10 +1021,13 @@ if not can_make_request():
 Venice integrates with popular frameworks:
 
 - **LangChain** - Use `return_search_results_as_documents` for LangChain consumption
-- **Vercel AI SDK** - Use Venice as provider
+- **Vercel AI SDK** - Use Venice as provider via `venice-ai-sdk-provider`
 - **CrewAI** - Use Venice for agent workflows
 - **Claude Code** - Use with Venice API
 - **OpenClaw** - Build autonomous agents
+- **Eliza** - AI agent framework with Venice support
+- **Coinbase Agentkit** - Crypto agent workflows
+- **Spring AI** - Java/Kotlin via OpenAI provider with Venice base URL
 - **Postman** - Import ready-to-use collection
 
 ---
@@ -1227,6 +1238,20 @@ if response.headers.get('x-venice-model-deprecation-warning'):
 
 ---
 
+## Community SDKs
+
+Beyond the OpenAI SDK "change base URL" approach, dedicated packages exist:
+
+| Language | Package | Description |
+|----------|---------|-------------|
+| Python | [`venice-ai`](https://pypi.org/project/venice-ai/) | Sync/async, streaming, error handling |
+| Python | [`pyvenice`](https://pypi.org/project/pyvenice/) | Lightweight with parameter validation |
+| TypeScript | [`venice-ai-sdk-provider`](https://www.npmjs.com/package/venice-ai-sdk-provider) | Vercel AI SDK provider |
+| Ruby | [`venice_client`](https://rubygems.org/gems/venice_client) | Auto-generated from OpenAPI spec |
+| CLI | [`veniceai/venice-cli`](https://github.com/veniceai/venice-cli) | Official CLI for chat, images, TTS |
+
+---
+
 ## Resources
 
 - **API Docs**: https://docs.venice.ai/api-reference/api-spec
@@ -1235,6 +1260,7 @@ if response.headers.get('x-venice-model-deprecation-warning'):
 - **API Keys**: https://venice.ai/settings/api
 - **LLMs.txt Index**: https://docs.venice.ai/llms.txt
 - **Swagger Spec**: https://api.venice.ai/doc/api/swagger.yaml
+- **Changelog**: https://featurebase.venice.ai/changelog
 - **Discord**: https://discord.gg/askvenice
 - **GitHub Docs**: https://github.com/veniceai/api-docs
 

@@ -42,6 +42,9 @@ Use `extra_body` with `venice_parameters`:
 | `character_slug` | string | Use AI character |
 | `include_venice_system_prompt` | boolean | Disable Venice defaults |
 
+Also in `extra_body` (but outside `venice_parameters`):
+- `prompt_cache_key` (string) - Routing hint for cache hits in multi-turn conversations
+
 ## Key Endpoints
 
 ```
@@ -56,9 +59,15 @@ POST /video/queue         # Queue video generation
 POST /video/retrieve      # Poll for completion
 POST /video/complete      # Delete from storage
 POST /embeddings          # Vector embeddings
-GET  /characters/{slug}  # Get character info
+POST /image/remove-background # Remove background
+GET  /image/styles        # List style presets
+GET  /characters/{slug}   # Get character info
 GET  /models              # List models with capabilities
-GET  /billing/balance    # Check USD/DIEM balance
+GET  /models/traits       # Auto-select models (default, fastest, etc.)
+GET  /models/compatibility_mapping # OpenAI-to-Venice model map
+GET  /api_keys/rate_limits     # View your rate limits
+GET  /api_keys/rate_limit_logs # Rate limit history
+GET  /billing/balance     # Check USD/DIEM balance
 ```
 
 ## Rate Limits
@@ -104,7 +113,7 @@ See: https://docs.venice.ai/overview/pricing
 | Budget reasoning | `deepseek-v3.2` |
 | Frontier | `openai-gpt-52` |
 
-Get all models: `GET /models` (check `capabilities` for vision, function calling, web search)
+Models change frequently. Verify current models with `GET /models` or use `GET /models/traits` for auto-selection (returns `default`, `fastest`, `default_code`, etc. without hardcoding IDs).
 
 ## Privacy Tiers
 
@@ -135,9 +144,19 @@ Key headers to check:
 - `x-venice-balance-usd`
 - `x-venice-model-deprecation-warning`
 
+## Community SDKs
+
+Beyond the OpenAI SDK approach, dedicated packages exist:
+- **Python**: [`venice-ai`](https://pypi.org/project/venice-ai/) | [`pyvenice`](https://pypi.org/project/pyvenice/)
+- **TypeScript**: [`venice-ai-sdk-provider`](https://www.npmjs.com/package/venice-ai-sdk-provider) (Vercel AI SDK)
+- **Ruby**: [`venice_client`](https://rubygems.org/gems/venice_client)
+- **CLI**: [`veniceai/venice-cli`](https://github.com/veniceai/venice-cli)
+
 ## Resources
 
 - Docs: https://docs.venice.ai
 - Models: https://docs.venice.ai/overview/models
 - Pricing: https://docs.venice.ai/overview/pricing
 - Keys: https://venice.ai/settings/api
+- Swagger: https://api.venice.ai/doc/api/swagger.yaml
+- Changelog: https://featurebase.venice.ai/changelog
